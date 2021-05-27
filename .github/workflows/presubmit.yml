@@ -13,15 +13,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Build
-      run: |
-        mkdir temp
-        cp Dockerfile.template temp/
-        cp package-lock.json temp/
-        cp server.js temp/
-        cp -r styles temp/
-        cp -r views temp/
-        rm -rf styles views
+    #- name: Build
+    #  run: |
+    #    mkdir temp
+    #    cp Dockerfile.template temp/
+    #    cp package-lock.json temp/
+    #    cp server.js temp/
+    #    cp -r styles temp/
+    #    cp -r views temp/
+    #    rm -rf styles views
 
     - name: Push
       run: |
@@ -30,6 +30,7 @@ jobs:
         rm /tmp/balena.zip
         export PATH=$PATH:/opt/balena-cli
         balena push --help
-        cd temp
-        balena login --token ${{secrets.BALENA_API_TOKEN}}
-        balena push dog-bark
+        #cd temp
+        balena login --token ${{secrets.YING_BALENA_API_TOKEN}}
+        #balena push dog-bark
+        balena push First-app-RasberryPi
