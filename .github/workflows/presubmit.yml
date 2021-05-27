@@ -13,15 +13,23 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Build
+      run: |
+        mkdir temp
+        cp Dockerfile.template temp/
+        cp package-lock.json temp/
+        cp server.js temp/
+        cp -r styles temp/
+        cp -r views temp/
+        rm -rf styles views
+
     - name: Push
       run: |
         curl -L -o /tmp/balena.zip https://github.com/balena-io/balena-cli/releases/download/v12.44.17/balena-cli-v12.44.17-linux-x64-standalone.zip
         unzip /tmp/balena.zip -d /opt
         rm /tmp/balena.zip
         export PATH=$PATH:/opt/balena-cli
-        #balena version
-        #balena help
-        #balena build --help
-        #balena push --help
-        balena login --token ${{secrets.IHAB_BALENA_API_TOKEN}}
-        balena push weatherstation
+        balena push --help
+        cd temp
+        balena login --token ${{secrets.BALENA_API_TOKEN}}
+        balena push dog-bark
