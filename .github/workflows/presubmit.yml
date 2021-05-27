@@ -21,4 +21,4 @@ jobs:
         balena build --help
         balena push --help
         balena login --token ${{secrets.BALENA_API_TOKEN}}
-        balena push
+        balena push dog-bark
