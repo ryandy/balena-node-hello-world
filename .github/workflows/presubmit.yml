@@ -24,4 +24,4 @@ jobs:
         #balena build --help
         #balena push --help
         balena login --token ${{secrets.IHAB_BALENA_API_TOKEN}}
-        balena push dog-bark
+        balena push weatherstation
