@@ -10,6 +10,9 @@ jobs:
     timeout-minutes: 60
 
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
     - name: Test
       run: |
         curl -L -o /tmp/balena.zip https://github.com/balena-io/balena-cli/releases/download/v12.44.17/balena-cli-v12.44.17-linux-x64-standalone.zip
