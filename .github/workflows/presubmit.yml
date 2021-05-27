@@ -1,0 +1,24 @@
+name: Presubmit
+
+on:
+  push:
+    branches: [ ra/balena-test ]
+
+jobs:
+  presubmit-build:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 60
+
+    steps:
+    - name: Test
+      run: |
+        curl -L -o /tmp/balena.zip https://github.com/balena-io/balena-cli/releases/download/v12.44.17/balena-cli-v12.44.17-linux-x64-standalone.zip
+        unzip /tmp/balena.zip -d /opt
+        rm /tmp/balena.zip
+        export PATH=$PATH:/opt/balena-cli
+        balena version
+        balena help
+        balena build --help
+        balena push --help
+        balena login --token ${{secrets.BALENA_API_TOKEN}}
+        balena push
